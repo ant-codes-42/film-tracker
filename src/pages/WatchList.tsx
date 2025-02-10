@@ -2,23 +2,23 @@ import type React from 'react';
 import { useEffect, useState } from 'react';
 import FilmsToWatchList from '../components/FilmsToWatchList';
 // TODO: Uncomment when Film interface is added
-// import type Film from '../utils/interfaces/Film.interface';
+import type Film from '../utils/interfaces/Film.interface';
 
 const WatchList = () => {
   // TODO: Add Film interface to state variable
-  const [filmsToWatch, setFilmsToWatch] = useState([]);
+  const [filmsToWatch, setFilmsToWatch] = useState<Film[]>([]);
 
   // TODO: Add correct types to the following parameters
   const removeFromStorage = (
-    e,
-    currentlyOnWatchList,
-    currentlyOnSeenItList,
-    title
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    currentlyOnWatchList: boolean | null | undefined,
+    currentlyOnSeenItList: boolean | null | undefined,
+    title: string | null
   ) => {
     e.preventDefault();
     if (currentlyOnWatchList) {
       // TODO: Add Film interface
-      let parsedFilmsToWatch = [];
+      let parsedFilmsToWatch: Film[] = [];
 
       const storedFilmsToWatch = localStorage.getItem('filmsToWatch');
       if (typeof storedFilmsToWatch === 'string') {
@@ -31,7 +31,7 @@ const WatchList = () => {
       localStorage.setItem('filmsToWatch', JSON.stringify(parsedFilmsToWatch));
     } else if (currentlyOnSeenItList) {
       // TODO: Add Film interface
-      let parsedAlreadySeenFilms = [];
+      let parsedAlreadySeenFilms: Film[] = [];
       const storedAlreadySeenFilms = localStorage.getItem('alreadySeenFilms');
       if (typeof storedAlreadySeenFilms === 'string') {
         parsedAlreadySeenFilms = JSON.parse(storedAlreadySeenFilms);
@@ -49,7 +49,7 @@ const WatchList = () => {
   useEffect(() => {
     const parsedFilmsToWatch = JSON.parse(
       // TODO: Add correct type assertion
-      localStorage.getItem('filmsToWatch')
+      localStorage.getItem('filmsToWatch') as string
     );
     setFilmsToWatch(parsedFilmsToWatch);
   }, []);
