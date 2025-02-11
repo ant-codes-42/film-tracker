@@ -8,7 +8,7 @@ export default interface Film {
     readonly Genre: string,
     readonly Director: string,
     readonly Writer: string,
-    readonly Starring: string,
+    readonly Actors: string,
     readonly Plot: string,
     readonly Language: string,
     readonly Country: string,
